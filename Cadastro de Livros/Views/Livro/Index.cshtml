@@ -1,0 +1,65 @@
+﻿@model List<ItemCatalogo>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Cadastro de Livros</h2>
+
+            <!-- Formulário de Cadastro -->
+            <form asp-controller="Livro" asp-action="Cadastrar" method="post" class="mt-4">
+
+                <div class="form-group">
+                    <label for="tipoItem">Tipo de Item:</label>
+                    <select name="tipoItem" class="form-control" required>
+                        <option value="">Selecione....</option> <!--Mutios problemas na validação por conta de não termos a tag value-->
+                        <option value="Livro">Livro</option>
+                        <option value="Revista">Revista</option>
+                    </select>
+                </div>
+
+                <br />
+
+                <div class="form-group">
+                    <label for="titulo">Título:</label>
+                    <input type="text" name="titulo" class="form-control" required />
+                </div>
+
+                <br />
+
+                <!-- Campo Autor ou Editora -->
+                <div class="form-group" id="divAutorEditora">
+                    <label for="autorEditora">Autor/Editora:</label>
+                    <input type="text" name="autorEditora" class="form-control" required/>
+                </div>
+
+                <br />
+                <br />
+
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+
+            <!-- Tabela de Itens Cadastrados -->
+            <table class="table bg-dark text-white">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Detalhes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Titulo</td>
+                            <td>@item.ExibirDetalhes()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
